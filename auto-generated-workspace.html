@@ -335,9 +335,51 @@ cpdefine("inline:com-chilipeppr-workspace-cnc", ["chilipeppr_ready"], function()
         <div class="container-fluid">
             <div class="row">
 
-                <!-- Left Column -->
-                <!-- Change the width by adjusting col-md-4 to be col-md-3 for skinnier, or col-md-5 for wider -->
-                <!-- You must have all columns add up to 12 since we use bootstrap's col-md technique, i.e. col-md-2, col-md-7, col-md-3 adds to 12 -->
+                
+                <!-- This is going to be the first widget -->
+                
+                <div class="col-md-4 col-sm-12">
+                    
+                    <div class="com-chilipeppr-ws-hdr well">
+                        
+                        JSON Server
+
+                    </div>
+
+                    <div id="mywidget1-instance">
+                        <p class="sample">3d Display goes here</p>
+                    </div>
+                
+                </div>
+                <!--This is going to be the second widget-->
+                
+                <div class="col-md-4 col-sm-12">
+
+                    <div class="com-chilipeppr-ws-hdr well">
+                        
+                        GRBL State
+
+                    </div>
+
+                    <div id="mywidget1-instance">
+                        <p class="sample">3d Display goes here</p>
+                    </div>
+
+                    
+
+                </div>
+                
+                <!--This is going to be the third widget-->
+                
+                <div class="col-md-4 col-sm-12">
+                    
+                    <div id="com-chilipeppr-widget-spconsole-instance">
+                        Serial Port Console goes here.
+                    </div>
+
+                </div>
+                
+                <!--Three Dimensional Display-->
                 <div class="col-md-12 col-sm-12">
 
                     <div class="com-chilipeppr-ws-hdr well">
@@ -347,28 +389,34 @@ cpdefine("inline:com-chilipeppr-workspace-cnc", ["chilipeppr_ready"], function()
                     </div>
 
                     <div id="mywidget1-instance">
-                        <p class="sample">Widget 1 goes here</p>
-                    </div>
-                    
-                    <div id="com-chilipeppr-widget-template-instance">
-                        <p class="sample">Template Widget goes here</p>
+                        <p class="sample">3d Display goes here</p>
                     </div>
 
-                    <div id="com-chilipeppr-widget-spconsole-instance">
-                        Serial Port Console goes here.
-                    </div>
+                    
 
                 </div>
 
                 <!-- Left Column -->
                 <div class="col-md-4 col-sm-12">
+                    
+                    <div class="com-chilipeppr-ws-hdr well">
+                        
+                        Insert Gcode Here
+
+                    </div>
                     <div id="mywidget2-instance">
-                        <p class="sample" style="min-height:200px;">Widget 2 goes here</p>
+                        <p class="sample" style="min-height:200px;">Widget 1 goes here</p>
                     </div>
                 </div>
                 
                 <!-- Center Column -->
                 <div class="col-md-4 col-sm-12">
+                    
+                    <div class="com-chilipeppr-ws-hdr well">
+                        
+                        Axes Position
+
+                    </div>
                     <div id="mywidget2-instance">
                         <p class="sample" style="min-height:200px;">Widget 2 goes here</p>
                     </div>
@@ -376,9 +424,32 @@ cpdefine("inline:com-chilipeppr-workspace-cnc", ["chilipeppr_ready"], function()
                 
                 <!-- Right Column -->
                 <div class="col-md-4 col-sm-12">
-                    <div id="mywidget2-instance">
-                        <p class="sample" style="min-height:200px;">Widget 2 goes here</p>
+                    <div class="com-chilipeppr-ws-hdr well">
+                        
+                        Status
+
                     </div>
+                    <div id="mywidget2-instance">
+                        <p class="sample" style="min-height:200px;">Widget 3 goes here</p>
+                    </div>
+                </div>
+                
+                <!--CRUD COMMAND BOARD-->
+                <!--Three Dimensional Display-->
+                <div class="col-md-12 col-sm-12">
+
+                    <div class="com-chilipeppr-ws-hdr well">
+                        
+                        Crud
+
+                    </div>
+
+                    <div id="mywidget1-instance">
+                        <p class="sample">An array of buttons with commands go here</p>
+                    </div>
+
+                    
+
                 </div>
 
             </div>
