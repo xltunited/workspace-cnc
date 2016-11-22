@@ -162,6 +162,8 @@ cpdefine("inline:com-chilipeppr-workspace-cnc", ["chilipeppr_ready"], function()
             
             this.loadTemplateWidget();
             
+            this.loadSerialPortWidget();
+            
             // Create our workspace upper right corner triangle menu
             this.loadWorkspaceMenu();
             // Add our billboard to the menu (has name, url, picture of workspace)
@@ -294,6 +296,28 @@ cpdefine("inline:com-chilipeppr-workspace-cnc", ["chilipeppr_ready"], function()
             );
         },
         /**
+         * Load the Serial port widget via chilipeppr.load()
+         */
+        loadSerialPortWidget: function(callback) {
+            var that = this;
+            chilipeppr.load(
+              "#com-chilipeppr-widget-serialport",
+              "http://raw.githubusercontent.com/chilipeppr/widget-spjs/master/auto-generated-widget.html",
+              function() {
+                // Callback after widget loaded into #myDivWidgetSerialport
+                // Now use require.js to get reference to instantiated widget
+                cprequire(
+                  ["inline:com-chilipeppr-widget-serialport"], // the id you gave your widget
+                  function(myObjWidgetSerialport) {
+                    // Callback that is passed reference to the newly loaded widget
+                    console.log("Widget / Serial Port JSON Server just got loaded.", myObjWidgetSerialport);
+                    myObjWidgetSerialport.init();
+                  }
+                );
+              }
+            );
+        },
+        /**
          * Load the workspace menu and show the pubsubviewer and fork links using
          * our pubsubviewer widget that makes those links for us.
          */
@@ -339,16 +363,8 @@ cpdefine("inline:com-chilipeppr-workspace-cnc", ["chilipeppr_ready"], function()
                 <!-- This is going to be the first widget -->
                 
                 <div class="col-md-4 col-sm-12">
-                    
-                    <div class="com-chilipeppr-ws-hdr well">
-                        
-                        JSON Server
 
-                    </div>
-
-                    <div id="mywidget1-instance">
-                        <p class="sample">3d Display goes here</p>
-                    </div>
+                    <div id="com-chilipeppr-widget-serialport"></div>
                 
                 </div>
                 <!--This is going to be the second widget-->
