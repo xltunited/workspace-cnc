@@ -72,6 +72,12 @@ cpdefine("inline:com-chilipeppr-workspace-cnc", ["chilipeppr_ready"], function()
             
             this.loadSerialPortWidget();
             
+            this.loadViewerWidget();
+            
+            this.loadGCodeWidget();
+            
+            this.loadAxesWidget();
+            
             // Create our workspace upper right corner triangle menu
             this.loadWorkspaceMenu();
             // Add our billboard to the menu (has name, url, picture of workspace)
@@ -204,6 +210,28 @@ cpdefine("inline:com-chilipeppr-workspace-cnc", ["chilipeppr_ready"], function()
             );
         },
         /**
+         * Load the Viewer widget via chilipeppr.load()
+         */
+        loadViewerWidget: function(callback) {
+            var that = this;
+            chilipeppr.load(
+              "#myDivWidget3dviewer",
+              "https://raw.githubusercontent.com/Icarusoncloud9/widget-3dviewer/master/auto-generated-widget.html",
+              function() {
+                // Callback after widget loaded into #myDivWidget3dviewer
+                // Now use require.js to get reference to instantiated widget
+                cprequire(
+                  ["inline:com-chilipeppr-widget-3dviewer"], // the id you gave your widget
+                  function(myObjWidget3dviewer) {
+                    // Callback that is passed reference to the newly loaded widget
+                    console.log("Widget / 3D GCode Viewer just got loaded.", myObjWidget3dviewer);
+                    myObjWidget3dviewer.init();
+                  }
+                );
+              }
+            );
+        },
+        /**
          * Load the Serial port widget via chilipeppr.load()
          */
         loadSerialPortWidget: function(callback) {
@@ -220,6 +248,50 @@ cpdefine("inline:com-chilipeppr-workspace-cnc", ["chilipeppr_ready"], function()
                     // Callback that is passed reference to the newly loaded widget
                     console.log("Widget / Serial Port JSON Server just got loaded.", myObjWidgetSerialport);
                     myObjWidgetSerialport.init();
+                  }
+                );
+              }
+            );
+        },
+        /**
+         * Load the Gcode widget via chilipeppr.load()
+         */
+        loadGCodeWidget: function(callback) {
+            var that = this;
+            chilipeppr.load(
+              "#myDivWidgetGcode",
+              "http://raw.githubusercontent.com/chilipeppr/widget-gcodelist/master/auto-generated-widget.html",
+              function() {
+                // Callback after widget loaded into #myDivWidgetGcode
+                // Now use require.js to get reference to instantiated widget
+                cprequire(
+                  ["inline:com-chilipeppr-widget-gcode"], // the id you gave your widget
+                  function(myObjWidgetGcode) {
+                    // Callback that is passed reference to the newly loaded widget
+                    console.log("Widget / Gcode v8 just got loaded.", myObjWidgetGcode);
+                    myObjWidgetGcode.init();
+                  }
+                );
+              }
+            );
+        },
+        /**
+         * Load the Axes widget via chilipeppr.load()
+         */
+        loadAxesWidget: function(callback) {
+            var that = this;
+            chilipeppr.load(
+              "#myDivWidgetXyz",
+              "http://raw.githubusercontent.com/chilipeppr/widget-axes/master/auto-generated-widget.html",
+              function() {
+                // Callback after widget loaded into #myDivWidgetXyz
+                // Now use require.js to get reference to instantiated widget
+                cprequire(
+                  ["inline:com-chilipeppr-widget-xyz"], // the id you gave your widget
+                  function(myObjWidgetXyz) {
+                    // Callback that is passed reference to the newly loaded widget
+                    console.log("Widget / XYZ Axes v2 just got loaded.", myObjWidgetXyz);
+                    myObjWidgetXyz.init();
                   }
                 );
               }

@@ -164,6 +164,12 @@ cpdefine("inline:com-chilipeppr-workspace-cnc", ["chilipeppr_ready"], function()
             
             this.loadSerialPortWidget();
             
+            this.loadViewerWidget();
+            
+            this.loadGCodeWidget();
+            
+            this.loadAxesWidget();
+            
             // Create our workspace upper right corner triangle menu
             this.loadWorkspaceMenu();
             // Add our billboard to the menu (has name, url, picture of workspace)
@@ -296,6 +302,28 @@ cpdefine("inline:com-chilipeppr-workspace-cnc", ["chilipeppr_ready"], function()
             );
         },
         /**
+         * Load the Viewer widget via chilipeppr.load()
+         */
+        loadViewerWidget: function(callback) {
+            var that = this;
+            chilipeppr.load(
+              "#myDivWidget3dviewer",
+              "https://raw.githubusercontent.com/Icarusoncloud9/widget-3dviewer/master/auto-generated-widget.html",
+              function() {
+                // Callback after widget loaded into #myDivWidget3dviewer
+                // Now use require.js to get reference to instantiated widget
+                cprequire(
+                  ["inline:com-chilipeppr-widget-3dviewer"], // the id you gave your widget
+                  function(myObjWidget3dviewer) {
+                    // Callback that is passed reference to the newly loaded widget
+                    console.log("Widget / 3D GCode Viewer just got loaded.", myObjWidget3dviewer);
+                    myObjWidget3dviewer.init();
+                  }
+                );
+              }
+            );
+        },
+        /**
          * Load the Serial port widget via chilipeppr.load()
          */
         loadSerialPortWidget: function(callback) {
@@ -312,6 +340,50 @@ cpdefine("inline:com-chilipeppr-workspace-cnc", ["chilipeppr_ready"], function()
                     // Callback that is passed reference to the newly loaded widget
                     console.log("Widget / Serial Port JSON Server just got loaded.", myObjWidgetSerialport);
                     myObjWidgetSerialport.init();
+                  }
+                );
+              }
+            );
+        },
+        /**
+         * Load the Gcode widget via chilipeppr.load()
+         */
+        loadGCodeWidget: function(callback) {
+            var that = this;
+            chilipeppr.load(
+              "#myDivWidgetGcode",
+              "http://raw.githubusercontent.com/chilipeppr/widget-gcodelist/master/auto-generated-widget.html",
+              function() {
+                // Callback after widget loaded into #myDivWidgetGcode
+                // Now use require.js to get reference to instantiated widget
+                cprequire(
+                  ["inline:com-chilipeppr-widget-gcode"], // the id you gave your widget
+                  function(myObjWidgetGcode) {
+                    // Callback that is passed reference to the newly loaded widget
+                    console.log("Widget / Gcode v8 just got loaded.", myObjWidgetGcode);
+                    myObjWidgetGcode.init();
+                  }
+                );
+              }
+            );
+        },
+        /**
+         * Load the Axes widget via chilipeppr.load()
+         */
+        loadAxesWidget: function(callback) {
+            var that = this;
+            chilipeppr.load(
+              "#myDivWidgetXyz",
+              "http://raw.githubusercontent.com/chilipeppr/widget-axes/master/auto-generated-widget.html",
+              function() {
+                // Callback after widget loaded into #myDivWidgetXyz
+                // Now use require.js to get reference to instantiated widget
+                cprequire(
+                  ["inline:com-chilipeppr-widget-xyz"], // the id you gave your widget
+                  function(myObjWidgetXyz) {
+                    // Callback that is passed reference to the newly loaded widget
+                    console.log("Widget / XYZ Axes v2 just got loaded.", myObjWidgetXyz);
+                    myObjWidgetXyz.init();
                   }
                 );
               }
@@ -355,100 +427,34 @@ cpdefine("inline:com-chilipeppr-workspace-cnc", ["chilipeppr_ready"], function()
     <div id="com-chilipeppr-widget-flash-instance"></div>
 
     <div id="com-chilipeppr-workspace-cnc" class="xhidden">
-
-        <div class="container-fluid">
+            
             <div class="row">
-
                 
-                <!-- This is going to be the first widget -->
-                
-                <div class="col-md-4 col-sm-12">
-
-                    <div id="com-chilipeppr-widget-serialport"></div>
-                
-                </div>
-                <!--This is going to be the second widget-->
-                
-                <div class="col-md-4 col-sm-12">
-
-                    <div class="com-chilipeppr-ws-hdr well">
-                        
-                        GRBL State
-
-                    </div>
-
-                    <div id="mywidget1-instance">
-                        <p class="sample">3d Display goes here</p>
-                    </div>
-
-                    
-
-                </div>
-                
-                <!--This is going to be the third widget-->
-                
-                <div class="col-md-4 col-sm-12">
-                    
-                    <div id="com-chilipeppr-widget-spconsole-instance">
-                        Serial Port Console goes here.
-                    </div>
-
-                </div>
-                
-                <!--Three Dimensional Display-->
-                <div class="col-md-12 col-sm-12">
-
-                    <div class="com-chilipeppr-ws-hdr well">
-                        
-                        Workspace - cnc
-
-                    </div>
-
-                    <div id="mywidget1-instance">
-                        <p class="sample">3d Display goes here</p>
-                    </div>
-
-                    
-
-                </div>
 
                 <!-- Left Column -->
                 <div class="col-md-4 col-sm-12">
                     
-                    <div class="com-chilipeppr-ws-hdr well">
-                        
-                        Insert Gcode Here
-
-                    </div>
-                    <div id="mywidget2-instance">
-                        <p class="sample" style="min-height:200px;">Widget 1 goes here</p>
-                    </div>
+                    <div id="myDivWidgetGcode"></div>
+                
                 </div>
                 
                 <!-- Center Column -->
                 <div class="col-md-4 col-sm-12">
                     
-                    <div class="com-chilipeppr-ws-hdr well">
-                        
-                        Axes Position
-
-                    </div>
-                    <div id="mywidget2-instance">
-                        <p class="sample" style="min-height:200px;">Widget 2 goes here</p>
-                    </div>
+                    <div id="mywidget2-instance"></div>
+                    
                 </div>
                 
                 <!-- Right Column -->
                 <div class="col-md-4 col-sm-12">
-                    <div class="com-chilipeppr-ws-hdr well">
-                        
-                        Status
-
-                    </div>
-                    <div id="mywidget2-instance">
-                        <p class="sample" style="min-height:200px;">Widget 3 goes here</p>
-                    </div>
+                   
+                    <div id="myDivWidgetXyz"></div>
+                    
                 </div>
+                
+            </div>
+            
+            <div class="row">
                 
                 <!--CRUD COMMAND BOARD-->
                 <!--Three Dimensional Display-->
@@ -469,30 +475,57 @@ cpdefine("inline:com-chilipeppr-workspace-cnc", ["chilipeppr_ready"], function()
                 </div>
 
             </div>
-        </div>
-    </div>
+        
+            <div class="row">
 
-    <!-- Keep this div hidden so it can be cloned and used by the Javascript -->
-    <div id="com-chilipeppr-workspace-sample-billboard" class="hidden">
-        <div class="billboard-content">
-            <h4 class="billboard-title" style="">Sample Workspace</h4>
-
-            <p class="billboard-url" style=""><a href="http://chilipeppr.com/sample">chilipeppr.com/sample</a>
-
-            </p>
-            <div class="billboard-imgcontain" style="">
-                <a href="http://chilipeppr.com/sample">
-                    <div class="billboard-img" style="background-image: url('https://github.com/chilipeppr/workspace-sample/raw/master/billboard.png')" />
-                </a>
-                <div class="billboard-stats2">
+                <!--Three Dimensional Display-->
+                <div class="col-md-12 col-sm-12">
+                    
+                    <div id="myDivWidget3dviewer"></div>
+                    
                 </div>
-
+                
             </div>
-            <p class="billboard-desc">
-                A ChiliPeppr Workspace that lets you do stuff.
-            </p>
-        </div>
+            
+            <div class="row">
+
+                
+                <!-- Serial Port  -->
+                
+                <div class="col-md-4 col-sm-12">
+
+                    <div id="com-chilipeppr-widget-serialport"></div>
+                
+                </div>
+                <!-- GRBL-->
+                
+                <div class="col-md-4 col-sm-12">
+
+                    <div class="com-chilipeppr-ws-hdr well">
+                        
+                        GRBL State
+
+                    </div>
+
+                    <div id="mywidget1-instance">
+                        <p class="sample">GRBL</p>
+                    </div>
+
+                    
+
+                </div>
+                
+                <!-- CONSOLE -->
+                
+                <div class="col-md-4 col-sm-12">
+                    
+                    <div id="com-chilipeppr-widget-spconsole-instance"></div>
+
+                </div>
+                
+            </div>
     </div>
+
 
 </body>
 
