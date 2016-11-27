@@ -78,6 +78,8 @@ cpdefine("inline:com-chilipeppr-workspace-cnc", ["chilipeppr_ready"], function()
             
             this.loadAxesWidget();
             
+            this.loadGRBLWidget();
+            
             // Create our workspace upper right corner triangle menu
             this.loadWorkspaceMenu();
             // Add our billboard to the menu (has name, url, picture of workspace)
@@ -216,7 +218,7 @@ cpdefine("inline:com-chilipeppr-workspace-cnc", ["chilipeppr_ready"], function()
             var that = this;
             chilipeppr.load(
               "#myDivWidget3dviewer",
-              "https://raw.githubusercontent.com/Icarusoncloud9/widget-3dviewer/master/auto-generated-widget.html",
+              "https://raw.githubusercontent.com/chilipeppr/widget-3dviewer/master/auto-generated-widget.html",
               function() {
                 // Callback after widget loaded into #myDivWidget3dviewer
                 // Now use require.js to get reference to instantiated widget
@@ -254,13 +256,35 @@ cpdefine("inline:com-chilipeppr-workspace-cnc", ["chilipeppr_ready"], function()
             );
         },
         /**
+         * Load the Serial port widget via chilipeppr.load()
+         */
+        loadGRBLWidget: function(callback) {
+            var that = this;
+            chilipeppr.load(
+              "#pnlWorkspace",
+              "http://raw.githubusercontent.com/raykholo/workspace-grbl/master/auto-generated-workspace.html",
+              function() {
+                // Callback after workspace loaded into #pnlWorkspace
+                // Now use require.js to get reference to instantiated workspace
+                cprequire(
+                  ["inline:com-chilipeppr-workspace-grbl"], // the id you gave your workspace
+                  function(myWorkspaceGrbl) {
+                    // Callback that is passed reference to the newly loaded workspace
+                    console.log("Workspace / grbl just got loaded.", myWorkspaceGrbl);
+                    myWorkspaceGrbl.init();
+                  }
+                );
+              }
+            );
+        },        
+        /**
          * Load the Gcode widget via chilipeppr.load()
          */
         loadGCodeWidget: function(callback) {
             var that = this;
             chilipeppr.load(
               "#myDivWidgetGcode",
-              "http://raw.githubusercontent.com/chilipeppr/widget-gcodelist/master/auto-generated-widget.html",
+              "https://raw.githubusercontent.com/chilipeppr/widget-gcodelist/master/auto-generated-widget.html",
               function() {
                 // Callback after widget loaded into #myDivWidgetGcode
                 // Now use require.js to get reference to instantiated widget

@@ -170,6 +170,8 @@ cpdefine("inline:com-chilipeppr-workspace-cnc", ["chilipeppr_ready"], function()
             
             this.loadAxesWidget();
             
+            this.loadGRBLWidget();
+            
             // Create our workspace upper right corner triangle menu
             this.loadWorkspaceMenu();
             // Add our billboard to the menu (has name, url, picture of workspace)
@@ -308,7 +310,7 @@ cpdefine("inline:com-chilipeppr-workspace-cnc", ["chilipeppr_ready"], function()
             var that = this;
             chilipeppr.load(
               "#myDivWidget3dviewer",
-              "https://raw.githubusercontent.com/Icarusoncloud9/widget-3dviewer/master/auto-generated-widget.html",
+              "https://raw.githubusercontent.com/chilipeppr/widget-3dviewer/master/auto-generated-widget.html",
               function() {
                 // Callback after widget loaded into #myDivWidget3dviewer
                 // Now use require.js to get reference to instantiated widget
@@ -346,13 +348,35 @@ cpdefine("inline:com-chilipeppr-workspace-cnc", ["chilipeppr_ready"], function()
             );
         },
         /**
+         * Load the Serial port widget via chilipeppr.load()
+         */
+        loadGRBLWidget: function(callback) {
+            var that = this;
+            chilipeppr.load(
+              "#pnlWorkspace",
+              "http://raw.githubusercontent.com/raykholo/workspace-grbl/master/auto-generated-workspace.html",
+              function() {
+                // Callback after workspace loaded into #pnlWorkspace
+                // Now use require.js to get reference to instantiated workspace
+                cprequire(
+                  ["inline:com-chilipeppr-workspace-grbl"], // the id you gave your workspace
+                  function(myWorkspaceGrbl) {
+                    // Callback that is passed reference to the newly loaded workspace
+                    console.log("Workspace / grbl just got loaded.", myWorkspaceGrbl);
+                    myWorkspaceGrbl.init();
+                  }
+                );
+              }
+            );
+        },        
+        /**
          * Load the Gcode widget via chilipeppr.load()
          */
         loadGCodeWidget: function(callback) {
             var that = this;
             chilipeppr.load(
               "#myDivWidgetGcode",
-              "http://raw.githubusercontent.com/chilipeppr/widget-gcodelist/master/auto-generated-widget.html",
+              "https://raw.githubusercontent.com/chilipeppr/widget-gcodelist/master/auto-generated-widget.html",
               function() {
                 // Callback after widget loaded into #myDivWidgetGcode
                 // Now use require.js to get reference to instantiated widget
@@ -429,75 +453,62 @@ cpdefine("inline:com-chilipeppr-workspace-cnc", ["chilipeppr_ready"], function()
     <div id="com-chilipeppr-workspace-cnc" class="xhidden">
             
             <div class="row">
-                
+                <div id="pnlWorkspace"></div>
 
-                <!-- Left Column -->
-                <div class="col-md-4 col-sm-12">
-                    
-                    <div id="myDivWidgetGcode"></div>
-                
-                </div>
-                
-                <!-- Center Column -->
-                <div class="col-md-4 col-sm-12">
-                    
-                    <div id="mywidget2-instance"></div>
-                    
-                </div>
-                
-                <!-- Right Column -->
-                <div class="col-md-4 col-sm-12">
-                   
-                    <div id="myDivWidgetXyz"></div>
-                    
-                </div>
-                
-            </div>
-            
-            <div class="row">
-                
-                <!--CRUD COMMAND BOARD-->
-                <!--Three Dimensional Display-->
-                <div class="col-md-12 col-sm-12">
-
-                    <div class="com-chilipeppr-ws-hdr well">
-                        
-                        Crud
-
-                    </div>
-
-                    <div id="mywidget1-instance">
-                        <p class="sample">An array of buttons with commands go here</p>
-                    </div>
-
-                    
-
-                </div>
-
-            </div>
-        
-            <div class="row">
-
-                <!--Three Dimensional Display-->
-                <div class="col-md-12 col-sm-12">
+                Three Dimensional Display
+                <div class="col-md-8 col-sm-12">
                     
                     <div id="myDivWidget3dviewer"></div>
                     
                 </div>
                 
-            </div>
-            
-            <div class="row">
+                 Right Column 
+                <div class="col-md-4 col-sm-12">
+                   
+                    <div id="myDivWidgetXyz"></div>
+                    
+                </div>
 
                 
-                <!-- Serial Port  -->
+                 Serial Port  
                 
-                <div class="col-md-4 col-sm-12">
+                <div class="col-md-4 col-sm-12 pull-right">
 
                     <div id="com-chilipeppr-widget-serialport"></div>
                 
                 </div>
-                <!-- GRBL-->
+                
+                 CONSOLE 
+                <div class="col-md-4 col-sm-12">
+                    
+                    <div id="com-chilipeppr-widget-spconsole-instance"></div>
+
+                </div>
+
+                 Right Column 
+                <div class="col-md-4 col-sm-12">
+                    
+                    <div id="myDivWidgetGcode"></div>
+                
+                </div>                
+                
+                
+                 CONSOLE 
+                <div class="col-md-4 col-sm-12">
+                    
+                    <div id="com-chilipeppr-widget-spconsole-instance"></div>
+
+                </div>
+
+                
+                 Center Column 
+                <div class="col-md-4 col-sm-12">
+                    
+                    <div id="mywidget2-instance"> This may just be blank for now</div>
+                    
+                </div>
+                
+                 Right Column 
                 
                 <div class="col-md-4 col-sm-12">
 
@@ -511,19 +522,24 @@ cpdefine("inline:com-chilipeppr-workspace-cnc", ["chilipeppr_ready"], function()
                         <p class="sample">GRBL</p>
                     </div>
 
-                    
-
                 </div>
                 
-                <!-- CONSOLE -->
-                
-                <div class="col-md-4 col-sm-12">
-                    
-                    <div id="com-chilipeppr-widget-spconsole-instance"></div>
+                <div class="col-md-12 col-sm-12">
+
+                    <div class="com-chilipeppr-ws-hdr well">
+                        
+                        Crud
+
+                    </div>
+
+                    <div id="mywidget1-instance">
+                        <p class="sample">An array of buttons with commands go here</p>
+                    </div>
 
                 </div>
-                
+
             </div>
+        
     </div>
 
 
